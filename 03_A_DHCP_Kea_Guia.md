@@ -8,7 +8,7 @@ Guia d'estudi i consulta per entendre i configurar un servidor DHCPv4 amb Kea a 
 
 Partim del servidor preparat a la guia d'Ubuntu i de la teoria de DHCP. Ara relacionarem els conceptes —interfície, subxarxa, pool, opcions, concessió i reserva— amb els fitxers i les comprovacions del servei.
 
-L'activitat que cal executar i documentar és en un document independent: [Activitat guiada amb Kea](04_DHCP_Kea_Activitat.md). Els valors de demostració d'aquesta guia no substitueixen els de l'activitat.
+L'activitat que cal executar i documentar és en un document independent: [Activitat guiada amb Kea](03_B_DHCP_Kea_Activitat.md). Els valors de demostració d'aquesta guia no substitueixen els de l'activitat.
 
 ## Ruta de treball
 
@@ -44,13 +44,13 @@ En acabar hauràs de poder explicar quina interfície atén Kea, què distribuei
 ### Convencions de la guia
 
 > [!IMPORTANT]
-> El PDF mostra adreces `192.169...`, que no pertanyen als blocs privats RFC 1918. Aquesta guia utilitza **192.168...** per al laboratori. És una correcció explícita d'adreçament; manté les funcions i el procediment de la presentació. Abans d'aplicar qualsevol exemple, comprova que el prefix no se superposi amb una altra xarxa del teu equip.
+> El PDF de partida i la rúbrica mostren adreces `192.169...`, que no pertanyen als blocs privats RFC 1918. Aquesta guia utilitza **192.168...** per al laboratori: conserva el procediment, però corregeix l'adreçament perquè sigui privat. La [guia d'activitat](03_B_DHCP_Kea_Activitat.md) explica aquesta discrepància. Abans d'aplicar qualsevol exemple, comprova que el prefix no se superposi amb una altra xarxa del teu equip.
 
 Els blocs de configuració són exemples complets quan així s'indica. Els fragments parcials s'han d'integrar al lloc especificat, no enganxar-se al final del fitxer.
 
 ### Requisits previs
 
-- Disposar de la base funcional de la [guia d'Ubuntu Server](00_UbuntuServer_Guide.md).
+- Disposar de la base funcional de la [guia d'Ubuntu Server](00_A_UbuntuServer.md).
 - Haver treballat els conceptes de la [introducció al servei DHCP](02_Teoria_DHCP_Guide.md).
 
 ---
@@ -135,7 +135,7 @@ Confirma `try` només després de comprovar el resultat. La reversió no substit
 
 ![Aplicació de la configuració amb netplan generate i netplan try](./source/03_A_DHCP_Kea_Guide/02-netplan-try.png)
 
-<!-- IMATGE 01: topologia amb Ubuntu Server, NAT i SMX-LAB; etiqueta MAC, interfície i funció. Zorin és client de la xarxa interna. Fitxer suggerit: source/03_DHCP_Kea/01-topologia.png -->
+<!-- IMATGE 01: topologia amb Ubuntu Server, NAT i SMX-LAB; etiqueta MAC, interfície i funció. Zorin és client de la xarxa interna. Fitxer suggerit: source/03_A_DHCP_Kea_Guide/01-topologia.png -->
 
 **Errors freqüents:** editar un YAML inexistent; copiar `enp0s8` sense identificar-lo; donar una passarel·la inventada a la interfície interna; usar noms de xarxa interna diferents.
 
@@ -383,7 +383,7 @@ La subxarxa conté 256 adreces, habitualment 254 hosts; el pool té `149 − 100
 
 **Comparació amb el PDF:** l'exemple inicial hi mostra `.10–.199` i després l'exemple de reserva utilitza `.100–.199`. No són el mateix interval. Aquí s'utilitza un únic pool coherent durant tota la demostració.
 
-<!-- IMATGE 02: JSON amb fletxes que relacionen interfície, subxarxa, pool i opcions amb la topologia. Fitxer suggerit: source/03_DHCP_Kea/02-json-explicat.png -->
+<!-- IMATGE 02: JSON amb fletxes que relacionen interfície, subxarxa, pool i opcions amb la topologia. Fitxer suggerit: source/03_A_DHCP_Kea_Guide/02-json-explicat.png -->
 
 ### 7. Temps de concessió i càlculs
 

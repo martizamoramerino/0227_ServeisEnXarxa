@@ -6,7 +6,7 @@
 
 Configuraràs un servidor DHCPv4 amb Kea a Ubuntu Server i demostraràs, des d'un client Zorin, que assigna adreces, comunica les opcions previstes i aplica una reserva. Capturaràs la negociació amb Wireshark i justificaràs quins missatges són broadcast o unicast en Ethernet i IPv4.
 
-Aquesta activitat desenvolupa les **pàgines 29–33 del PDF UD02_AA2_DHCP_LinuxAmbKea.pdf**, diapositives 28–32. Per entendre els components i la sintaxi, consulta [Configuració de DHCP amb Kea](03_DHCP_Kea_Guia.md).
+Aquesta activitat desenvolupa les **pàgines 29–33 del PDF UD02_AA2_DHCP_LinuxAmbKea.pdf**, diapositives 28–32. Per entendre els components i la sintaxi, consulta [Configuració de DHCP amb Kea](03_A_DHCP_Kea_Guia.md).
 
 No cal reinstal·lar Ubuntu. Partim de la base funcional de la primera pràctica, amb Netplan, permisos administratius i SSH ja comprovats. El treball nou consisteix a adaptar-ne la xarxa i desplegar-hi el servei.
 
@@ -26,7 +26,7 @@ No cal reinstal·lar Ubuntu. Partim de la base funcional de la primera pràctica
 
 ## Índex
 
-- **Preparació:** [Objectius i resultats esperats](#objectius-i-resultats-esperats) · [Convencions](#convencions-de-la-guia) · [Requisits previs](#requisits-previs)
+- **Preparació:** [Objectius i resultats esperats](#objectius-i-resultats-esperats) · [Rúbrica i evidències](#rúbrica-criteris-i-evidències) · [Convencions](#convencions-de-la-guia) · [Requisits previs](#requisits-previs)
 - **[Fase 1 — Preparació](#fase-1):** [1. Preparar les còpies de treball](#1-preparar-les-còpies-de-treball) · [2. Planificar les adreces](#2-planificar-les-adreces) · [3. Preparar Zorin i Wireshark](#3-preparar-zorin-i-wireshark)
 - **[Fase 2 — Xarxa del servidor](#fase-2):** [4. Adaptar la xarxa del servidor](#4-adaptar-la-xarxa-del-servidor)
 - **[Fase 3 — Servei DHCP](#fase-3):** [5. Instal·lar Kea i seleccionar els serveis](#5-installar-kea-i-seleccionar-els-serveis) · [6. Configurar DHCPv4](#6-configurar-dhcpv4) · [7. Validar i iniciar el servei](#7-validar-i-iniciar-el-servei)
@@ -52,13 +52,31 @@ No cal reinstal·lar Ubuntu. Partim de la base funcional de la primera pràctica
 - [ ] Reserva `.55` associada a la MAC real del client i comprovada.
 - [ ] Resultats documentats amb captures pròpies i explicacions.
 
+### Rúbrica: criteris i evidències
+
+Fes servir aquesta taula per comprovar que el lliurament conté evidència de tots els apartats avaluats. Els resultats han de ser els de la teva pràctica, no captures ni valors copiats dels exemples.
+
+| Criteri | On preparar-lo | Evidència que has d'incloure o explicar |
+|---|---|---|
+| Instal·lació de Kea i preparació dels serveis | [§5](#5-installar-kea-i-seleccionar-els-serveis) | Versió i unitats identificades; DHCPv4 preparat i DHCPv6/DDNS aturats i deshabilitats. |
+| Xarxa del servidor | [§4](#4-adaptar-la-xarxa-del-servidor) | NAT i interfície interna diferenciats; IP estàtica, sense gateway ni DNS manuals a la interfície interna. |
+| Configuració DHCPv4 | [§6](#6-configurar-dhcpv4) | Fitxer validable amb la subxarxa, pool, opcions i interfície correctes. |
+| Validació i servei | [§7](#7-validar-i-iniciar-el-servei) | Resultat de `kea-dhcp4 -t`, servei actiu i registres revisats. |
+| Client Zorin i assignació | [§§8 i 10](#8-preparar-el-client-en-automàtic) | Client automàtic, IP/prefix, gateway, DNS i servidor DHCP observats. |
+| Captura de la negociació | [§9](#9-capturar-i-interpretar-la-negociació) | Fitxer `.pcapng` propi amb missatges relacionats pel client i Transaction ID. |
+| Broadcast i unicast | [§9.2–9.3](#9-capturar-i-interpretar-la-negociació) | Anàlisi de les adreces IP i MAC i justificació del tipus de destinació a cada capa. |
+| Concessions DHCP | [§11](#11-consultar-les-concessions) | Registre del fitxer configurat, interpretat i relacionat amb la IP/MAC del client. |
+| Reserva per MAC | [§12](#12-crear-i-provar-la-reserva) | Reserva `.55`, MAC real i client en automàtic; ACK i concessió després de renovar. |
+| Memòria tècnica i autonomia | [§14](#14-documentar-i-lliurar) | Explicacions pròpies, decisions justificades, comprovacions i incidències reals. |
+| Markdown i publicació al repositori | [README del repositori](README.md) | Documents i imatges enllaçats, llegibles i consultables al GitHub; sense dades sensibles. |
+
 ### Convencions de la guia
 
 #### Convencions i adaptacions de l'enunciat
 
 **`X` representa el teu número de llista.** No escriguis la lletra X al YAML, al JSON ni a les ordres que necessiten una IP. En els exemples complets s'utilitza **X = 17**: substitueix el tercer octet per la teva dada.
 
-| Element | PDF original | En aquesta activitat |
+| Element | PDF i rúbrica | En aquesta activitat |
 |---|---|---|
 | Adreçament | `192.169.X...` | `192.168.X...`, dins del bloc privat |
 | IP del servidor | `.1` | `.1`, es manté |
@@ -70,15 +88,15 @@ No cal reinstal·lar Ubuntu. Partim de la base funcional de la primera pràctica
 | Wireshark | Execució amb `sudo` | Usuari ordinari amb permisos de captura |
 | Inici de la captura | Canvi de NAT a interna durant la captura | Interfície interna preparada, captura iniciada abans d'activar el perfil DHCP |
 
-El canvi d'adreçament és una **adaptació docent explícita**. No es presenta `192.169...` com si fos privat. Mantén la mateixa família d'adreces durant tota l'activitat; no barregis captures del PDF amb valors del teu laboratori.
+El canvi d'adreçament és una **adaptació docent explícita** respecte del PDF i de la rúbrica: `192.169.0.0/16` no és un rang privat RFC 1918. Per això els exemples i les comprovacions d'aquesta activitat utilitzen `192.168.X.0/24`. Mantén la mateixa família d'adreces a Netplan, Kea, client i memòria; no barregis captures dels exemples amb les dades del teu laboratori.
 
 > [!IMPORTANT]
 > El PDF no desplega cap encaminador a `.254`. Amb només Ubuntu Server i Zorin, el client pot rebre correctament aquesta opció i el DNS, però **no tenir Internet**. L'objectiu és provar DHCP i la comunicació local. No configuraràs encaminament ni NAT dins d'Ubuntu en aquesta activitat.
 
 ### Requisits previs
 
-- Disposar de les VM Ubuntu Server i Zorin preparades a la [guia base](00_UbuntuServer_Guide.md).
-- Consultar la [guia de configuració de DHCP amb Kea](03_DHCP_Kea_Guia.md) per entendre els components i la sintaxi.
+- Disposar de les VM Ubuntu Server i Zorin preparades a la [guia base](00_A_UbuntuServer.md).
+- Consultar la [guia de configuració de DHCP amb Kea](03_A_DHCP_Kea_Guia.md) per entendre els components i la sintaxi.
 - Conèixer el número de llista que utilitzaràs per personalitzar les adreces.
 
 ---
@@ -117,7 +135,7 @@ El segon resultat ha de ser `root`. La configuració inicial esperada de la base
 
 **Si falla:** resol els errors de la base abans d'instal·lar Kea. Una IP duplicada o una interfície mal identificada no es corregeix editant el pool.
 
-<!-- CAPTURA 01: VM de treball identificades a VirtualBox, bases apagades i dos adaptadors del servidor. Fitxer suggerit: source/04_DHCP_Kea_Activitat/01-vm-treball.png -->
+<!-- CAPTURA 01: VM de treball identificades a VirtualBox, bases apagades i dos adaptadors del servidor. Fitxer suggerit: source/03_B_DHCP_KeaActivitat/01-vm-treball.png -->
 
 ### 2. Planificar les adreces
 
@@ -197,7 +215,7 @@ Si Zorin només tenia un adaptador NAT, pots canviar **aquell adaptador** a xarx
 
 Conservem la interfície interna de la base quan existeix, però retirem el NAT del client durant la prova perquè no amagui els resultats amb una segona ruta, un altre DNS o un altre DHCP.
 
-<!-- CAPTURA 02: Wireshark mostra les interfícies locals des de l'usuari ordinari. Fitxer suggerit: source/04_DHCP_Kea_Activitat/02-wireshark-preparat.png -->
+<!-- CAPTURA 02: Wireshark mostra les interfícies locals des de l'usuari ordinari. Fitxer suggerit: source/03_B_DHCP_KeaActivitat/02-wireshark-preparat.png -->
 
 ---
 
@@ -280,7 +298,7 @@ getent hosts ubuntu.com
 
 **Si falla:** revisa nom real de fitxer, indentació, noms d'interfície i altres YAML. Si perds SSH, continua per la consola. Canviar la IP interna també canvia la destinació que utilitzaves per entrar per SSH.
 
-<!-- CAPTURA 03: YAML final i sortides d'adreces/rutes que permetin relacionar NAT i xarxa interna. Fitxer suggerit: source/04_DHCP_Kea_Activitat/03-netplan-servidor.png -->
+<!-- CAPTURA 03: YAML final i sortides d'adreces/rutes que permetin relacionar NAT i xarxa interna. Fitxer suggerit: source/03_B_DHCP_KeaActivitat/03-netplan-servidor.png -->
 
 ---
 
@@ -329,7 +347,7 @@ El PDF parla d'editar un fitxer per desactivar components. En aquest entorn ho f
 
 **Si surt `Unit not found`:** torna a la llista d'unitats i comprova els paquets. No escriguis `kea-dhcp-ddns` si la unitat instal·lada és `kea-dhcp-ddns-server`.
 
-<!-- CAPTURA 04: versió de Kea i estat inactive/disabled de DHCPv6 i DDNS. Fitxer suggerit: source/04_DHCP_Kea_Activitat/04-components.png -->
+<!-- CAPTURA 04: versió de Kea i estat inactive/disabled de DHCPv6 i DDNS. Fitxer suggerit: source/03_B_DHCP_KeaActivitat/04-components.png -->
 
 ### 6. Configurar DHCPv4
 
@@ -391,7 +409,7 @@ Substitueix el contingut per aquesta estructura, adaptada al teu número i inter
 
 **Comprova que ho entens:** l'adreça `.1` del servidor no apareix com a pool ni com a gateway. Kea selecciona la subxarxa que correspon a la seva interfície; la IP del servidor ja està configurada a Netplan.
 
-<!-- CAPTURA 05: fitxer DHCPv4 complet i llegible amb les dades pròpies, sense contrasenyes. Fitxer suggerit: source/04_DHCP_Kea_Activitat/05-configuracio-kea.png -->
+<!-- CAPTURA 05: fitxer DHCPv4 complet i llegible amb les dades pròpies, sense contrasenyes. Fitxer suggerit: source/03_B_DHCP_KeaActivitat/05-configuracio-kea.png -->
 
 ### 7. Validar i iniciar el servei
 
@@ -419,7 +437,7 @@ sudo journalctl -u kea-dhcp4-server -b --no-pager -n 50
 
 **Si la prova és correcta però el servei falla:** els registres poden revelar una interfície inexistent, un conflicte amb un altre procés o permisos d'escriptura. Comprova `/var/lib/kea` i els permisos del paquet; no apliquis `chmod 777` ni canviïs tots els fitxers a cegues.
 
-<!-- CAPTURA 06: validació correcta i servei DHCPv4 active/running. Fitxer suggerit: source/04_DHCP_Kea_Activitat/06-servei-actiu.png -->
+<!-- CAPTURA 06: validació correcta i servei DHCPv4 active/running. Fitxer suggerit: source/03_B_DHCP_KeaActivitat/06-servei-actiu.png -->
 
 ---
 
@@ -464,7 +482,7 @@ Substitueix `NOM_PERFIL_ANTERIOR` pel nom real. Si ja existeix `Kea-LAB`, revisa
 
 **Escull un dels dos recorreguts, gràfic o terminal.** No cal executar-los tots dos. No activis encara el perfil nou.
 
-<!-- CAPTURA 07: perfil IPv4 automàtic del client i MAC de la interfície interna. Fitxer suggerit: source/04_DHCP_Kea_Activitat/07-client-automatic.png -->
+![Exemple de perfil de NetworkManager amb IPv4 automàtic i DNS i rutes automàtics; la imatge no demostra per si sola que el client sigui a SMX-LAB ni que Kea li hagi concedit una IP](./source/03_B_DHCP_KeaActivitat/07-client-ipv4-automatic.png)
 
 ### 9. Capturar i interpretar la negociació
 
@@ -488,12 +506,38 @@ sudo nmcli connection up "Kea-LAB"
 7. Aplica un **filtre de visualització**:
 
 ```text
-udp.port == 67 || udp.port == 68
+dhcp
 ```
 
-També es pot utilitzar `dhcp` o, en versions antigues, `bootp`, si Wireshark reconeix el filtre. No enganxis el filtre de visualització al camp de filtre de captura. L'equivalent de captura seria `udp port 67 or udp port 68`.
+`dhcp` és el filtre de visualització recomanat. `S` no és un filtre vàlid. En versions antigues, Wireshark pot utilitzar `bootp`. No enganxis un filtre de visualització al camp de filtre de captura; l'equivalent de captura és `udp port 67 or udp port 68`.
 
 L'ordre proposat manté l'objectiu del PDF —capturar abans de demanar la configuració— sense canviar de xarxa una VM en plena captura.
+
+#### 9.1.1 Renovar la connexió del client
+
+Si cal generar una petició nova per comprovar canvis de Kea o capturar trànsit, primer identifica la interfície i el perfil de NetworkManager:
+
+```bash
+ip -br link
+nmcli device status
+nmcli connection show
+```
+
+Amb la captura de Wireshark ja en marxa, desconnecta i torna a connectar la interfície interna identificada, per exemple `enp0s3`:
+
+```bash
+sudo nmcli device disconnect enp0s3
+sudo nmcli device connect enp0s3
+```
+
+Com a alternativa, pots reiniciar el perfil correcte, substituint el nom per un dels que mostra `nmcli connection show`:
+
+```bash
+sudo nmcli connection down "Conexión cableada 1"
+sudo nmcli connection up "Conexión cableada 1"
+```
+
+Els noms d'interfície i de perfil varien; no copiïs els exemples sense identificar-los. No cal instal·lar ni executar `dhclient`: NetworkManager ja pot gestionar DHCP. La reconnexió pot produir una negociació inicial o una renovació segons l'estat de la concessió que conserva el client.
 
 #### 9.2 Identificar els missatges
 
@@ -525,18 +569,18 @@ Criteris per classificar:
 
 #### 9.4 Si no apareix DORA complet
 
-Una reconnexió amb una concessió recordada pot començar amb Request, i una renovació pot mostrar només Request/ACK. Això no equival a una captura inicial DORA completa.
+Una reconnexió amb una concessió recordada pot començar amb Request, i una renovació pot mostrar només Request/ACK. És un intercanvi DHCP vàlid i no indica per si sol cap error; simplement no és una captura inicial DORA completa. Conserva i interpreta el que has capturat, sense presentar una renovació com si fos DORA.
 
 1. Comprova que la captura ha començat abans d'activar la connexió correcta.
 2. Comprova que no has capturat el NAT.
-3. Desa el primer resultat i explica què mostra.
-4. Per obtenir un inici nou, utilitza un perfil de prova nou sense concessió pròpia, com `Kea-LAB-Prova2`, mantenint el perfil anterior inactiu; captura abans d'activar-lo. El comportament depèn del gestor i de l'estat recordat, així que comprova els paquets resultants.
-5. Si el client continua recuperant una concessió, treballa amb una còpia de client preparada abans de la primera negociació o deixa expirar la concessió amb el perfil inactiu i repeteix la prova. No esborris la base de concessions del servidor per forçar la imatge esperada.
+3. Desa el primer resultat i explica què mostra; filtra amb `dhcp`, no amb `S`.
+4. Si necessites DORA inicial per completar l'anàlisi, utilitza un perfil de prova nou sense concessió pròpia, com `Kea-LAB-Prova2`, mantenint l'anterior inactiu; captura abans d'activar-lo. El comportament depèn del gestor i de l'estat recordat, així que comprova els paquets resultants.
+5. Si el client continua recuperant una concessió, treballa amb una còpia preparada abans de la primera negociació o deixa expirar la concessió amb el perfil inactiu i repeteix la prova. No esborris la base de concessions del servidor per forçar la imatge esperada.
 
 Una petició d'una adreça de la xarxa anterior pot anar seguida d'un NAK i després d'una descoberta. Conserva i interpreta aquesta seqüència si apareix.
 
-<!-- CAPTURA 08: quatre missatges de la mateixa negociació visibles amb Transaction ID, IP, ports i opcions rellevants. Fitxer suggerit: source/04_DHCP_Kea_Activitat/08-dora.png -->
-<!-- CAPTURA 09: detall d'un paquet amb destinació MAC i IPv4 desplegades per justificar-ne la classificació. Fitxer suggerit: source/04_DHCP_Kea_Activitat/09-broadcast-unicast.png -->
+![Captura Wireshark amb els missatges DHCP Discover, Offer, Request i ACK del client i el servidor Kea](./source/03_B_DHCP_KeaActivitat/08-dora.png)
+<!-- CAPTURA 09: detall d'un paquet amb destinació MAC i IPv4 desplegades per justificar-ne la classificació. Fitxer suggerit: source/03_B_DHCP_KeaActivitat/09-broadcast-unicast.png -->
 
 ### 10. Comprovar la configuració del client
 
@@ -592,7 +636,7 @@ Distingeix:
 
 No canviïs el gateway a `.1` per intentar navegar: Ubuntu no s'ha configurat com a router i, a més, deixaries de comprovar el valor demanat.
 
-<!-- CAPTURA 10: IP, ruta, dades DHCP i DNS del client, amb prova local cap al servidor. Fitxer suggerit: source/04_DHCP_Kea_Activitat/10-client-validat.png -->
+<!-- CAPTURA 10: IP, ruta, dades DHCP i DNS del client, amb prova local cap al servidor. Fitxer suggerit: source/03_B_DHCP_KeaActivitat/10-client-validat.png -->
 
 ---
 
@@ -629,7 +673,7 @@ El CSV pot acumular actualitzacions; diverses files no signifiquen necessàriame
 
 **Si no trobes el fitxer:** comprova la ruta configurada, si s'ha produït una concessió i els registres. El PDF cita també `dhcp4.leases`; no el busquis com a ruta obligatòria si has configurat `kea-leases4.csv`.
 
-<!-- CAPTURA 11: capçalera del CSV i registre que es relaciona amb el client. Fitxer suggerit: source/04_DHCP_Kea_Activitat/11-concessio-servidor.png -->
+<!-- CAPTURA 11: capçalera del CSV i registre que es relaciona amb el client. Fitxer suggerit: source/03_B_DHCP_KeaActivitat/11-concessio-servidor.png -->
 
 ### 12. Crear i provar la reserva
 
@@ -736,8 +780,8 @@ nmcli -f GENERAL,IP4,DHCP4 device show enp0s8
 
 Si manté l'adreça anterior, comprova primer que hi ha hagut un intercanvi nou, que Kea ha carregat la reserva i que la MAC coincideix. Pot aparèixer un rebuig de l'adreça anterior abans d'una nova assignació. No posis `.55` manualment per simular que la reserva funciona.
 
-<!-- CAPTURA 12: reserva al JSON amb la MAC real i IP .55. Fitxer suggerit: source/04_DHCP_Kea_Activitat/12-reserva-configurada.png -->
-<!-- CAPTURA 13: client automàtic amb .55, ACK corresponent i registre del servidor. Fitxer suggerit: source/04_DHCP_Kea_Activitat/13-reserva-validada.png -->
+<!-- CAPTURA 12: reserva al JSON amb la MAC real i IP .55. Fitxer suggerit: source/03_B_DHCP_KeaActivitat/12-reserva-configurada.png -->
+<!-- CAPTURA 13: client automàtic amb .55, ACK corresponent i registre del servidor. Fitxer suggerit: source/03_B_DHCP_KeaActivitat/13-reserva-validada.png -->
 
 ---
 
@@ -839,13 +883,47 @@ Els JSON que lliures són còpies documentals: no cal deixar dues configuracions
 | Arriba Discover però no Offer | Kea aturat, interfície/subxarxa incorrecta, pool o filtre | Llegir registres i contrastar configuració |
 | Hi ha Offer de dos servidors | Una altra VM o DHCP inesperat al segment | Identificar l'opció Server Identifier i revisar la topologia |
 | Wireshark no mostra interfícies | Permisos de captura pendents | Revisar grup i tornar a iniciar sessió |
-| Només es veu Request/ACK | Renovació o concessió recordada | Repetir el procediment d'inici i explicar l'estat observat |
+| Només es veu Request/ACK | Renovació o concessió recordada | És vàlid; explicar que no és la negociació inicial DORA |
 | El client manté la IP manual antiga | Perfil equivocat o dades manuals conservades | Consultar el perfil actiu i passar-lo a automàtic |
-| El client rep una IP del NAT | Adaptador equivocat | Retirar NAT de la prova i reconnectar la interna |
+| El client rep una IP `10.0.2.x` | Zorin encara utilitza NAT i el DHCP de VirtualBox | Desactivar NAT durant la prova i comprovar que el client i el servidor comparteixen exactament `SMX-LAB` |
+| `nmcli` no mostra `DHCP4.OPTION` | La versió de NetworkManager no exposa aquestes opcions | Contrastar IP i rutes, consultar `resolvectl status` si està disponible i inspeccionar l'ACK a Wireshark |
 | Kea falla després d'afegir reserva | Coma, nivell de JSON o MAC incorrectes | Executar `-t`, corregir i reiniciar |
 | El client no obté .55 | Reserva no carregada, MAC equivocada o intercanvi incomplet | Contrastar JSON, registre i nova captura |
 | No existeix dhcp4.leases | S'ha configurat una altra ruta | Llegir `lease-database.name` |
 | DHCP funciona però no Internet | No hi ha router funcional a .254 | Documentar la limitació; no alterar els valors exigits |
+
+#### Seqüència breu de comprovació
+
+1. A la configuració de VirtualBox, comprova que l'adaptador intern del servidor i el del client tenen exactament el mateix nom de xarxa (en aquesta activitat, `SMX-LAB`). Zorin ha de tenir desactivat el NAT durant la prova.
+2. A Zorin, identifica la interfície i el perfil correctes amb `ip -br link`, `nmcli device status` i `nmcli connection show`. Confirma l'adreça amb `ip -4 addr show NOM_INTERFICIE` i les rutes amb `ip route`.
+3. A Ubuntu Server, valida el fitxer i l'estat del servei:
+
+   ```bash
+   sudo kea-dhcp4 -t /etc/kea/kea-dhcp4.conf
+   sudo systemctl status kea-dhcp4-server --no-pager
+   ```
+
+   Per consultar el port UDP 67, `sudo ss -lunp | grep ':67'` pot aportar informació, però Kea pot utilitzar sockets de baix nivell; no facis servir aquesta sortida com a única prova que escolta.
+4. Inicia Wireshark a la interfície interna amb el filtre de visualització `dhcp` i, després, renova la connexió des de Zorin seguint el §9.1.1. Comprova que l'identificador del servidor de l'ACK és el de Kea, no el del NAT.
+5. Al servidor, consulta el final del fitxer de concessions configurat a `lease-database.name`:
+
+   ```bash
+   sudo tail -n 10 /var/lib/kea/kea-leases4.csv
+   ```
+
+6. A Zorin, prova la connectivitat local amb la IP interna real del servidor, per exemple:
+
+   ```bash
+   ping -c 4 192.168.X.1
+   ```
+
+   Substitueix `X` pel número de llista. No tenir Internet és esperable en aquesta topologia: no hi ha cap encaminador real a `.254`, i el NAT del servidor no comparteix Internet automàticament amb Zorin.
+
+**Resultat verificat en una prova de laboratori diferent:** Kea a `192.168.50.10` va concedir `192.168.50.100` al client amb MAC `08:00:27:1d:ef:ca`, i la concessió es va trobar a `kea-leases4.csv`. És una evidència que Kea va concedir aquella adreça en aquella configuració; **no copiïs aquests valors com si fossin els de la rúbrica**, que en aquesta activitat demana servidor `.1` i pool `.10–.50`.
+
+Una resposta DHCP amb el servidor `10.0.2.2` és un indici clar que el client està parlant amb el DHCP de la xarxa NAT de VirtualBox, no amb Kea. Aquesta captura és un exemple d'aquesta situació: mostra un Request/ACK, però no demostra que Kea hagi concedit l'adreça. Revisa que el client i el servidor estiguin connectats a la mateixa xarxa interna `SMX-LAB` i captura a la interfície interna del client.
+
+![Exemple d'una captura DHCP incorrecta per a l'activitat: l'ACK prové de 10.0.2.2, la xarxa NAT de VirtualBox, no de Kea](./source/03_B_DHCP_KeaActivitat/extra-dhcp-nat-no-kea.png)
 
 **Mètode:** observa → formula una hipòtesi → comprova → canvia una sola cosa → repeteix la prova. Si sospites d'un tallafoc, inspecciona les regles i el trànsit abans de desactivar-lo; no deixis tots els filtres oberts com a solució permanent.
 

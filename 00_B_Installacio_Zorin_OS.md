@@ -522,9 +522,13 @@ La MAC pot aparèixer amb formats diferents:
 
 És el mateix valor; Linux hi afegeix separadors i acostuma a mostrar lletres en minúscula.
 
-**Pregunta de control:** l'adreça IPv4 rebuda en NAT serà la mateixa que rebrà del servidor Kea a `SMX-LAB`? No necessàriament. Són xarxes i servidors DHCP diferents.
+En aquest exemple, la MAC de l'adaptador NAT de VirtualBox coincideix amb la de `enp0s3`. El perfil de NetworkManager mostra `10.0.2.15` i la ruta `10.0.2.2`, dades de la xarxa NAT que poden variar segons l'entorn; no són una concessió de Kea a `SMX-LAB`.
 
-<!-- CAPTURA 10: ordres de xarxa que mostrin interfície, IPv4 i ruta. Fitxer suggerit: imatges/10-xarxa-nat.png -->
+![Adaptador NAT de Zorin a VirtualBox i MAC coincident amb la interfície enp0s3](./source/00_Zorin_OS/10a-zorin-nat-mac.png)
+
+![Detalls de la connexió NAT del client Zorin: IP, ruta predeterminada i DNS](./source/00_Zorin_OS/10b-zorin-nat-connexio.png)
+
+**Pregunta de control:** l'adreça IPv4 rebuda en NAT serà la mateixa que rebrà del servidor Kea a `SMX-LAB`? No necessàriament. Són xarxes i servidors DHCP diferents.
 
 ---
 
