@@ -85,7 +85,7 @@ Una **adreça MAC** identifica una interfície dins de l'enllaç local; una **ad
 
 > **Pregunta de control:** si el mòbil mostra que està connectat al Wi-Fi, ja saps que té una IP, una passarel·la i un DNS correctes? No: estar associat a la xarxa sense fil i disposar d'una configuració IP útil són comprovacions diferents.
 
-<!-- IMATGE 01: Esquema original d'un client de l'aula amb IP 192.168.50.120/24, porta d'enllaç 192.168.50.1, servidor DHCP 192.168.50.2 i servidor DNS representat com a servei diferenciat. Mostra amb fletxes què proporciona DHCP i què fa DNS. Fitxer suggerit: source/02_Teoria_DHCP/01-dades-de-xarxa-i-dhcp.png -->
+<!-- IMATGE 01 — PROMPT: Crea un esquema vectorial original d'un client de l'aula amb IP 192.168.50.120/24, porta d'enllaç 192.168.50.1, servidor DHCP 192.168.50.2 i servidor DNS representat com a servei diferenciat. Mostra amb fletxes què proporciona DHCP i què fa DNS. Utilitza etiquetes clares en català i no imitis una captura de pantalla. Fitxer suggerit: source/02_Teoria_DHCP/01-dades-de-xarxa-i-dhcp.png -->
 ![Què fa el DHCP i DNS?](./source/02_Servei_DHCP/01-dades-de-xarxa-i-dhcp.png)
 
 ### 2. Què és DHCP i què aporta?
@@ -145,7 +145,7 @@ Per memoritzar l'ordre dels quatre missatges principals, utilitzem **DORA**:
 
 Si responen dos servidors, el client pot rebre més d'una oferta. Quan demana una oferta, deixa clar quin servidor ha seleccionat. **Una oferta encara no és una concessió confirmada**: cal interpretar també el `REQUEST` i l'`ACK`. L'enviament concret d'`OFFER` i `ACK` pot ser per unicast o broadcast segons l'estat del client i l'intercanvi; el diagrama simplificat de les diapositives serveix per entendre l'ordre, no per fixar un únic tipus d'enviament.
 
-<!-- IMATGE 02: Diagrama original de seqüència DORA amb client, servidor DHCP A i servidor DHCP B. Representa Discover, dues ofertes, Request que selecciona A i ACK d'A; ressalta que l'oferta no és encara una concessió confirmada. No etiquetis tots els Offer i ACK com a broadcast obligatori. Fitxer suggerit: source/02_Teoria_DHCP/02-sequencia-dora.png -->
+<!-- IMATGE 02 — PROMPT: Dissenya un diagrama original de seqüència DORA amb client, servidor DHCP A i servidor DHCP B. Representa Discover, dues ofertes, Request que selecciona A i ACK d'A; ressalta que l'oferta no és encara una concessió confirmada. No etiquetis tots els Offer i ACK com a broadcast obligatori. Usa fletxes diferenciades i missatges llegibles. Fitxer suggerit: source/02_Teoria_DHCP/02-sequencia-dora.png -->
 ![DORA: De la recerca a la concesió](./source/02_Servei_DHCP/02-sequencia-dora.png)
 <!-- CAPTURA RECOMANADA — DORA A WIRESHARK: captura pròpia filtrada amb `dhcp` o `bootp` on apareguin, en ordre, Discover, Offer, Request i ACK. Mostra les columnes origen, destinació, protocol i informació; destaca UDP 68→67 i 67→68 i anonimitza qualsevol dada no necessària. Fitxer suggerit: source/02_Teoria_DHCP/02b-dora-wireshark.png -->
 ![DORA "Captura" de WireShark](./source/02_Servei_DHCP/02b-dora-wireshark.png)
@@ -173,7 +173,7 @@ Suposem que una concessió comença a les **09.00** i dura **8 hores**. Si no es
 
 Si el servidor deixa de respondre a les 10.00, el client d'aquest exemple **no perd automàticament la IP a les 10.00**. Cal mirar si la seva concessió continua vigent i si es pot renovar abans del venciment.
 
-<!-- IMATGE 03: Línia temporal d'una concessió de 8 hores iniciada a les 09.00. Situa T1 a les 13.00, T2 a les 16.00 i el venciment a les 17.00. Distingueix les renovacions fallides d'una concessió ja caducada. Fitxer suggerit: source/02_Teoria_DHCP/03-concessio-t1-t2.png -->
+<!-- IMATGE 03 — PROMPT: Crea una línia temporal d'una concessió de 8 hores iniciada a les 09.00. Situa T1 a les 13.00, T2 a les 16.00 i el venciment a les 17.00. Distingueix les renovacions fallides d'una concessió ja caducada. Comprova la coherència de l'escala i mantén els horaris exactes. Fitxer suggerit: source/02_Teoria_DHCP/03-concessio-t1-t2.png -->
 ![Concessió DHCP de 8 hores](./source/02_Servei_DHCP/03-concessio-t1-t2.png)
 
 #### Missatges per a situacions diferents
@@ -237,7 +237,7 @@ El client pot estar configurat en mode automàtic i, malgrat això, no obtenir c
 
 Una adreça `169.254.x.x` és una **pista**: indica que aquell client no mostra la configuració DHCP que esperàvem. Pot facilitar comunicació entre equips del mateix enllaç que tinguin adreces compatibles, però no dona per si sola una sortida normal a Internet. La selecció de l'adreça incorpora comprovacions amb ARP per evitar duplicats. No assumeixis que tots els sistemes Linux activaran automàticament aquest comportament per a IPv4; depèn del gestor de xarxa i de la configuració.
 
-<!-- IMATGE 06: Comparació de dos clients de la mateixa aula: un ha obtingut 192.168.50.120/24, porta d'enllaç i DNS per DHCP; l'altre mostra 169.254.23.8/16 sense la configuració esperada. Mostra l'abast local de l'adreça d'enllaç local i les preguntes que cal investigar, sense afirmar que qualsevol Linux l'assignarà. Fitxer suggerit: source/02_Teoria_DHCP/06-dhcp-versus-ip-enllac-local.png -->
+<!-- IMATGE 06 — PROMPT: Crea una infografia comparant dos clients de la mateixa aula: un ha obtingut 192.168.50.120/24, porta d'enllaç i DNS per DHCP; l'altre mostra 169.254.23.8/16 sense la configuració esperada. Mostra l'abast local de l'adreça d'enllaç local i preguntes de diagnosi, sense afirmar que qualsevol Linux l'assignarà. Fes servir icones i etiquetes clares, no captures reals. Fitxer suggerit: source/02_Teoria_DHCP/06-dhcp-versus-ip-enllac-local.png -->
 ![DHCP Client Ubuntu](./source/02_Servei_DHCP/05-client-linux-comprovacions.png)
 
 **Seqüència de diagnosi si esperaves DHCP i no ha funcionat:**
@@ -283,7 +283,8 @@ La **subxarxa** `/24` conté 256 adreces; en l'ús IPv4 convencional de l'exerci
 
 El `+1` inclou el primer i l'últim valor. No restem dues adreces més al resultat: `.100` i `.149` són adreces de host vàlides; l'adreça de xarxa `.0` i el broadcast `.255` ja són fora del pool. Les adreces de la passarel·la i del servidor DHCP també són fora del rang i no es repartiran com a adreces dinàmiques d'aquest pool.
 
-<!-- IMATGE 07: Barra de la subxarxa 192.168.50.0/24 amb xarxa .0, passarel·la .1, servidor DHCP .2, pool .100–.149 de 50 adreces i broadcast .255. Distingeix clarament subxarxa, hosts possibles i rang repartible. Fitxer suggerit: source/02_Teoria_DHCP/07-subxarxa-i-pool-dhcp.png -->
+<!-- IMATGE 07 — PROMPT: Dibuixa una barra de la subxarxa 192.168.50.0/24 amb xarxa .0, passarel·la .1, servidor DHCP .2, pool .100–.149 de 50 adreces i broadcast .255. Distingeix clarament subxarxa, hosts possibles i rang repartible. Alinea les etiquetes i comprova tots els límits numèrics. Fitxer suggerit: source/02_Teoria_DHCP/07-subxarxa-i-pool-dhcp.png -->
+![Subxarxa i Pool](./source/02_Servei_DHCP/07-subxarxa-i-pool-dhcp.png)
 
 #### Llegir una configuració sense confondre capacitats
 
@@ -300,6 +301,7 @@ Si 60 clients nous necessiten alhora una adreça **només d'aquest pool** i no s
 Les dues captures de routers de la presentació mostren **configuracions diferents**. Si una comença en `.100` i permet 50 clients, l'última adreça del rang serà `.149`. Si una altra va de `.100` a `.199`, conté 100 adreces. Una concessió de `10080` **minuts** equival a `10080 ÷ 60 ÷ 24 = 7 dies`. Mira sempre la unitat que utilitza cada interfície.
 
 <!-- CAPTURA 08: Reproducció pròpia d'una configuració de pool DHCP d'un router o servidor del laboratori. Ressalta inici, final, màscara, porta d'enllaç, DNS i unitat de la concessió; acompanya-la del càlcul de capacitat. No cal copiar captures de la presentació. Fitxer suggerit: source/02_Teoria_DHCP/08-lectura-configuracio-pool.png -->
+![Lectura Configuració](./source/02_Servei_DHCP/08-lectura-configuracio-pool.png)
 
 #### Àmbits i interfícies
 
@@ -317,7 +319,8 @@ El `DHCPDISCOVER` inicial pot sortir per **broadcast local**, que un router no r
 
 **Exemple:** una aula és a `192.168.10.0/24` i una altra a `192.168.20.0/24`. Poden utilitzar un servidor DHCP central, sempre que el relay i els àmbits de totes dues xarxes estiguin ben configurats. **El relay no tria lliurement l'adreça que correspon a cada client:** trasllada la petició i aporta la informació necessària perquè el servidor prengui la decisió.
 
-<!-- IMATGE 09: Dues subxarxes 192.168.10.0/24 i 192.168.20.0/24, un router que actua com a DHCP relay i un servidor central. Mostra el broadcast local del client fins al relay, la petició que el relay envia al servidor i l'àmbit escollit per a la xarxa d'origen. Fitxer suggerit: source/02_Teoria_DHCP/09-dhcp-relay-dues-subxarxes.png -->
+<!-- IMATGE 09 — PROMPT: Crea un diagrama original amb dues subxarxes, 192.168.10.0/24 i 192.168.20.0/24, un router que actua com a DHCP relay i un servidor central. Mostra el broadcast local del client fins al relay, la petició que el relay envia al servidor i l'àmbit escollit per a la xarxa d'origen. Diferencia visualment els segments i etiqueta les fletxes en català. Fitxer suggerit: source/02_Teoria_DHCP/09-dhcp-relay-dues-subxarxes.png -->
+![DHCP Relay Entre Xarxes](./source/02_Servei_DHCP/09-dhcp-relay-dues-subxarxes.png)
 
 Quan un client d'una altra subxarxa no rep configuració, investiga **on s'atura l'intercanvi**: el relay escolta la xarxa correcta? Pot arribar al servidor? El servidor té un àmbit per a la xarxa del client? La resposta pot tornar? Aquesta comprovació és més útil que canviar opcions a l'atzar.
 
@@ -354,7 +357,8 @@ En switches que disposen d'aquesta funció, **DHCP snooping** distingeix entre p
 
 Aquí *port* significa **port físic o lògic del switch**, diferent dels ports **UDP 67 i 68**. Les peticions legítimes dels clients han de poder entrar pels ports no fiables. Si marques com a no fiable el camí pel qual arriba el servidor legítim, pots bloquejar-ne les respostes; si declares de confiança ports de clients sense criteri, debilites la protecció. Les ubicacions correctes depenen de la topologia real.
 
-<!-- IMATGE 10: Esquema original d'un switch amb clients en ports no fiables, servidor DHCP legítim darrere d'un port de confiança i servidor no autoritzat en un port de client. Dibuixa Discover permès des del client, Offer legítim acceptat i Offer del servidor no autoritzat filtrat; distingeix ports del switch i ports UDP. Fitxer suggerit: source/02_Teoria_DHCP/10-dhcp-snooping-ports.png -->
+<!-- IMATGE 10 — PROMPT: Dissenya un esquema original d'un switch amb clients en ports no fiables, servidor DHCP legítim darrere d'un port de confiança i servidor no autoritzat en un port de client. Dibuixa Discover permès des del client, Offer legítim acceptat i Offer del servidor no autoritzat filtrat; distingeix ports del switch i ports UDP. Usa llegenda clara i no representis una captura d'una interfície real. Fitxer suggerit: source/02_Teoria_DHCP/10-dhcp-snooping-ports.png -->
+![DHCP Snooping Ports](./source/02_Servei_DHCP/10-dhcp-snooping-ports.png)
 
 **Monitoritzar** el trànsit ajuda a detectar un problema; **filtrar-lo** al switch és una mesura diferent. En una incidència cal identificar el servidor real que ha respost, revisar les concessions i comprovar que el camí cap al servidor legítim continua operatiu.
 
@@ -419,6 +423,7 @@ Els clients de `192.168.20.0/24` no arriben a un servidor DHCP que funciona per 
 Dos ordinadors de la mateixa aula tenen IP de la mateixa subxarxa, però un ha rebut `192.168.50.1` com a porta d'enllaç i l'altre `192.168.50.254`. La navegació del segon falla. Quines dades de les concessions compararàs i quina possible causa investigaràs?
 
 <!-- CAPTURA 11: Dues sortides pròpies i anonimitzades d'ipconfig /all de clients del mateix segment amb diferències en servidor DHCP, porta d'enllaç o DNS. Ressalta els camps que fonamenten la hipòtesi de diagnosi; evita incloure noms personals o identificadors innecessaris. Fitxer suggerit: source/02_Teoria_DHCP/11-comparacio-clients-dhcp.png -->
+![Comparació Clients](./source/02_Servei_DHCP/11-comparacio-clients-dhcp.png)
 
 #### Activitat 9 · Verifica el teu equip
 

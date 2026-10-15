@@ -135,7 +135,7 @@ Confirma `try` només després de comprovar el resultat. La reversió no substit
 
 ![Aplicació de la configuració amb netplan generate i netplan try](./source/03_A_DHCP_Kea_Guide/02-netplan-try.png)
 
-<!-- IMATGE 01: topologia amb Ubuntu Server, NAT i SMX-LAB; etiqueta MAC, interfície i funció. Zorin és client de la xarxa interna. Fitxer suggerit: source/03_A_DHCP_Kea_Guide/01-topologia.png -->
+<!-- IMATGE 01 — PROMPT: Crea un diagrama vectorial original de topologia amb Ubuntu Server, NAT i SMX-LAB; etiqueta MAC, interfície i funció. Mostra Zorin com a client de la xarxa interna. Mantén separats visualment els adaptadors i deixa clar quin segment connecta cada interfície. No imitis una captura de VirtualBox. Fitxer suggerit: source/03_A_DHCP_Kea_Guide/01-topologia.png -->
 
 **Errors freqüents:** editar un YAML inexistent; copiar `enp0s8` sense identificar-lo; donar una passarel·la inventada a la interfície interna; usar noms de xarxa interna diferents.
 
@@ -383,7 +383,7 @@ La subxarxa conté 256 adreces, habitualment 254 hosts; el pool té `149 − 100
 
 **Comparació amb el PDF:** l'exemple inicial hi mostra `.10–.199` i després l'exemple de reserva utilitza `.100–.199`. No són el mateix interval. Aquí s'utilitza un únic pool coherent durant tota la demostració.
 
-<!-- IMATGE 02: JSON amb fletxes que relacionen interfície, subxarxa, pool i opcions amb la topologia. Fitxer suggerit: source/03_A_DHCP_Kea_Guide/02-json-explicat.png -->
+<!-- IMATGE 02 — PROMPT: Dissenya una infografia original amb un fragment JSON esquemàtic i fletxes que relacionin interfície, subxarxa, pool i opcions amb la topologia. No inventis valors de configuració ni generis un fitxer executable; fes servir etiquetes curtes, claus representatives i estructura visual clara. Fitxer suggerit: source/03_A_DHCP_Kea_Guide/02-json-explicat.png -->
 
 ### 7. Temps de concessió i càlculs
 

@@ -6,9 +6,9 @@ Al llarg del mòdul configurarem i administrarem serveis de xarxa en entorns Lin
 
 ## Lliçons disponibles
 
-Fes clic a la **imatge** o al **títol** per obrir cada lliçó. Hi trobaràs les sis guies i activitats disponibles, ordenades segons la numeració dels fitxers. Els documents **00 A** i **00 B** preparen el servidor i el client del laboratori.
+Fes clic a la **imatge** quan n'hi hagi o al **títol** per obrir cada lliçó. Hi trobaràs les set guies i activitats disponibles, ordenades segons la numeració dels fitxers. Els documents **00 A** i **00 B** preparen el servidor i el client del laboratori.
 
-| Accés visual | Lliçó i continguts |
+| Accés | Lliçó i continguts |
 |---|---|
 | [<img src="source/00_UbuntuServer_Images/00-ubuntu-server-24-04-portada.png" alt="Obre la lliçó 00 A: Ubuntu Server 24.04 LTS base per a Serveis en Xarxa" width="280">](00_A_UbuntuServer.md) | **[00 A · Ubuntu Server 24.04 LTS base per a Serveis en Xarxa](00_A_UbuntuServer.md)**<br><br>Prepara la màquina virtual que utilitzaràs com a servidor al laboratori: instal·lació, configuració bàsica, SSH i xarxa amb Netplan.<br><br>**5 fases · 15 apartats**<br>Inclou validació, instantània, connexió amb un client i exportació d'una OVA. |
 | [<img src="source/00_Zorin_OS/00-instalacio-zorin-os-portada.png" alt="Obre la lliçó 00 B: Instal·lació de Zorin OS en una màquina virtual" width="280">](00_B_Installacio_Zorin_OS.md) | **[00 B · Instal·lació de Zorin OS en una màquina virtual](00_B_Installacio_Zorin_OS.md)**<br><br>Prepara una VM independent amb Zorin OS Core com a client gràfic de les pràctiques: descàrrega i verificació de la ISO, creació de la VM i instal·lació.<br><br>**5 fases · 12 apartats**<br>Inclou actualitzacions, identificació de la xarxa NAT i conservació d'una base reutilitzable. |
@@ -16,10 +16,11 @@ Fes clic a la **imatge** o al **títol** per obrir cada lliçó. Hi trobaràs le
 | [<img src="source/02_Servei_DHCP/00-servei-dhcp-portada.png" alt="Obre la lliçó 02: Introducció al servei DHCP" width="280">](02_Teoria_DHCP_Guide.md) | **[02 · Introducció al servei DHCP](02_Teoria_DHCP_Guide.md)**<br><br>Entén la configuració automàtica de xarxa: DORA, concessions, pools, reserves, relay i diagnosi del client.<br><br>**4 fases · 12 apartats**<br>Inclou incidències i protecció, 9 activitats, solucionari raonat i autoavaluació. |
 | [<img src="source/03_A_DHCP_Kea_Guide/00-configuracio-dhcp-kea-portada.png" alt="Obre la lliçó 03 A: Configuració de DHCP amb Kea a Ubuntu Server" width="280">](03_A_DHCP_Kea_Guia.md) | **[03 A · Configuració de DHCP amb Kea a Ubuntu Server](03_A_DHCP_Kea_Guia.md)**<br><br>Relaciona la teoria amb la configuració d'un servidor DHCPv4 a Ubuntu: interfícies, serveis, JSON, pools, opcions i temps de concessió.<br><br>**5 fases · 13 apartats**<br>Inclou validació del servei, comprovació del client, reserves, diagnosi i autoavaluació. |
 | [<img src="source/03_B_DHCP_KeaActivitat/00-activitat-dhcp-kea-zorin-portada.png" alt="Obre la lliçó 03 B: Activitat guiada de DHCP amb Kea i Zorin" width="280">](03_B_DHCP_Kea_Activitat.md) | **[03 B · Activitat guiada de DHCP amb Kea i Zorin](03_B_DHCP_Kea_Activitat.md)**<br><br>Desplega Kea amb les teves adreces de laboratori i comprova l'assignació des de Zorin. Captura i interpreta la negociació amb Wireshark.<br><br>**6 fases · 14 apartats**<br>Inclou consulta de concessions, prova d'una reserva, persistència i lliurament d'evidències. |
+| [<img src="source/04_DHCP_Repas/00-avaluacio-kea-dhcp-portada.png" alt="Obre l'activitat 04" width="280">](04_DHCP_Repas.md) | **[04 · Activitat d'avaluació: desplegament, configuració i anàlisi de Kea DHCP](04_DHCP_Repas.md)**<br><br>Enunciat d'avaluació sobre DORA i tràfic DHCP, configuració JSON de Kea, reserves, diagnosi al servidor i als clients, i disseny d'un mapa conceptual.<br><br>El lliurament demana un PDF únic amb redacció pròpia, captures de terminal i el mapa conceptual integrat. |
 
 ## Com seguir les guies
 
-Comença per les guies **00 A** i **00 B** per disposar de les dues VM. Repassa TCP/IP i la teoria DHCP amb els documents **01** i **02**; després utilitza la guia **03 A** com a suport per resoldre l'activitat **03 B**.
+Comença per les guies **00 A** i **00 B** per disposar de les dues VM. Repassa TCP/IP i la teoria DHCP amb els documents **01** i **02**; després utilitza la guia **03 A** com a suport per resoldre l'activitat pràctica **03 B**. L'activitat d'avaluació **04** recull els continguts de DHCP i Kea en un enunciat independent, amb lliurament en PDF.
 
 Per treballar amb les guies:
 

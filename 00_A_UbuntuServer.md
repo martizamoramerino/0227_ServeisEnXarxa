@@ -471,7 +471,7 @@ Si prement Enter la ISO no s'expulsa sola, pots retirar-la manualment des de **D
 > Si l'opció de treure el disc apareix desactivada i cap ISO està marcada, el disc virtual ja s'ha expulsat automàticament. Tanca el menú, prem Enter i espera que es reiniciï; si es queda encallat, selecciona **Máquina > Reiniciar**. No seleccionis cap ISO del menú, perquè les tornaries a inserir.
 
 ![Nota amb els passos a seguir quan el disc ja s'ha expulsat automàticament](./source/00_UbuntuServer_Images/23-nota-retirada-iso.png)
-<!-- Nota/esquema de suport elaborat per al curs: Nota amb els passos a seguir quan el disc ja s'ha expulsat automàticament -->
+<!-- NOTA/ESQUEMA — PROMPT: Crea una targeta visual didàctica amb els passos que cal seguir quan el disc d'instal·lació ja s'ha expulsat automàticament. Mostra una seqüència numerada amb icones neutres de disc i reinici; deixa el text dels passos curt i editable, sense inventar opcions de menú. Estil net, llegible i apte per inserir en una guia. Desa-la com a source/00_UbuntuServer_Images/23-nota-retirada-iso.png. -->
 
 La instal·lació haurà acabat correctament quan arribis a la petició d'inici de sessió sense tornar a passar per l'assistent.
 
@@ -661,7 +661,7 @@ Ctrl + X
 Obre una sessió nova o torna a iniciar sessió. Després executa:
 
 ![Nota amb els passos per editar /etc/hosts i tornar a comprovar amb hostnamectl](./source/00_UbuntuServer_Images/35-nota-passos-hosts-hostnamectl.png)
-<!-- Nota/esquema de suport elaborat per al curs: Nota amb els passos per editar /etc/hosts i tornar a comprovar amb hostnamectl -->
+<!-- NOTA/ESQUEMA — PROMPT: Dissenya una targeta visual que expliqui el flux de treball per editar /etc/hosts i tornar a comprovar el nom amb hostnamectl. Representa només l'ordre de les dues tasques amb icones de fitxer i terminal; no mostris sortides falses ni inventis ordres addicionals. Estil sobri i llegible, amb espai per afegir instruccions pròpies. Desa-la com a source/00_UbuntuServer_Images/35-nota-passos-hosts-hostnamectl.png. -->
 
 ```bash
 hostname
@@ -908,7 +908,7 @@ journalctl -u systemd-timesyncd -b --no-pager -n 30
 Activar NTP no demostra que la sincronització sigui immediata. Cal verificar l'estat final.
 
 ![Nota amb els passos per forçar la sincronització de l'hora amb set-ntp false/true](./source/00_UbuntuServer_Images/53-nota-solucionant-errors-data-hora.png)
-<!-- Nota/esquema de suport elaborat per al curs: Nota amb els passos per forçar la sincronització de l'hora amb set-ntp false/true -->
+<!-- NOTA/ESQUEMA — PROMPT: Crea un esquema curt del procediment de sincronització horària que utilitza timedatectl set-ntp false i timedatectl set-ntp true. Mostra els passos en ordre i inclou una comprovació final de l'estat, però no inventis la sortida de terminal. Utilitza icones simples de rellotge i terminal, tipografia clara i un disseny apte per a una guia de laboratori. Desa-la com a source/00_UbuntuServer_Images/53-nota-solucionant-errors-data-hora.png. -->
 
 ---
 

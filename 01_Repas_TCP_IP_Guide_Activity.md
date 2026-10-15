@@ -75,7 +75,7 @@ Un protocol és un conjunt de regles que permeten comunicar-se als equips. **TCP
 | Internet | IP, ICMP | A quina adreça IP s'envia el paquet i per on s'encamina? |
 | Accés a la xarxa | Ethernet, Wi-Fi | Com es transmet dins de l'enllaç local? |
 
-<!-- IMATGE 01: Diagrama de quatre capes de la pila TCP/IP. Mostra un missatge que baixa per les capes de l'emissor i puja per les del receptor; etiqueta HTTP/DNS, TCP/UDP i ports, IP, Ethernet/Wi-Fi i MAC. No afegeixis protocols sense explicar-los. Fitxer suggerit: imatges/pila-tcp-ip.png -->
+<!-- IMATGE 01 — PROMPT: Crea una infografia vectorial original, clara i llegible, sobre les quatre capes de la pila TCP/IP. Mostra un missatge que baixa per les capes de l'emissor i puja per les del receptor; etiqueta HTTP/DNS, TCP/UDP i ports, IP, Ethernet/Wi-Fi i MAC. No afegeixis protocols sense explicar-los ni imitis una captura real. Fitxer suggerit: imatges/pila-tcp-ip.png -->
 ![Pila TCP/IP](./source/01_Repas_TCP_IP/01-pila-tcp-ip.png)
 
 #### Identificadors que no s'han de confondre
@@ -144,7 +144,7 @@ La màscara marca amb bits **1** la part de xarxa i amb bits **0** la part dispo
 
 Per exemple, `255.255.255.192` té **26 bits a 1**: els primers 24 corresponen als tres primers octets i l'últim octet, `192`, és `11000000` en binari. Per això s'escriu `/26`.
 
-<!-- IMATGE 02: Esquema horitzontal dels 32 bits d'una IPv4 i d'una màscara /26; ressalta en colors diferents els 26 bits de xarxa i els 6 bits restants. Usa 192.168.22.15/26 i escriu 192 = 11000000. Fitxer suggerit: imatges/mascara-26-bits.png -->
+<!-- IMATGE 02 — PROMPT: Crea un esquema horitzontal dels 32 bits d'una IPv4 i d'una màscara /26; ressalta en colors diferents els 26 bits de xarxa i els 6 bits restants. Usa 192.168.22.15/26 i escriu 192 = 11000000. Mantén les xifres alineades i llegibles, amb estil vectorial didàctic. Fitxer suggerit: imatges/mascara-26-bits.png -->
 ![Màscara de 26 bits](./source/01_Repas_TCP_IP/02-mascara-26-bits.png)
 
 #### De decimal a binari sense saltar passos
@@ -169,7 +169,7 @@ AND:          1 0 0 1 0 0 0 0  = 144
 
 La xarxa és `192.168.223.144`. Per trobar el broadcast, es conserven els quatre bits de xarxa i es posen a `1` els quatre bits d'equip: `10011111`, que val `159`.
 
-<!-- IMATGE 03A: Graella de 8 columnes amb els pesos 128–1 i tres files: IP 153 (10011001), màscara 240 (11110000) i resultat AND 144 (10010000). Diferencia amb dos colors els bits de xarxa i els bits d'equip, i afegeix el broadcast 159 (10011111). Fitxer suggerit: source/01_Repas_TCP_IP/03a-and-binari-28.png -->
+<!-- IMATGE 03A — PROMPT: Genera una graella didàctica de 8 columnes amb els pesos 128–1 i tres files: IP 153 (10011001), màscara 240 (11110000) i resultat AND 144 (10010000). Diferencia amb dos colors els bits de xarxa i els bits d'equip, i afegeix el broadcast 159 (10011111). Revisa que totes les xifres binàries siguin exactes i llegibles. Fitxer suggerit: source/01_Repas_TCP_IP/03a-and-binari-28.png -->
 ![AND Binari i Broadcast amb /28](./source/01_Repas_TCP_IP/03a-and-binari-28.png)
 
 #### Com es calcula l'adreça de xarxa?
@@ -200,7 +200,7 @@ Quan el valor de la màscara canvia en un octet, calcula **`256 − valor de la 
 
 **Exemple 3: `8.45.127.12/20`.** En el tercer octet, `256 − 240 = 16` i `127` cau al bloc `112–127`. La xarxa és `8.45.112.0` i el broadcast `8.45.127.255`. Observa que un bloc pot abraçar diversos valors del tercer octet.
 
-<!-- IMATGE 03: Recta de blocs /22 en el tercer octet. Dibuixa 92–95, 96–99, 100–103; destaca la IP 10.254.96.104 i els extrems 10.254.96.0 i 10.254.99.255. Fitxer suggerit: imatges/blocs-subxarxes-22.png -->
+<!-- IMATGE 03 — PROMPT: Dibuixa una recta numèrica didàctica de blocs /22 en el tercer octet. Mostra els intervals 92–95, 96–99 i 100–103; destaca la IP 10.254.96.104 i els extrems 10.254.96.0 i 10.254.99.255. Mantén els valors exactes i diferencia visualment el bloc que conté la IP. Fitxer suggerit: imatges/blocs-subxarxes-22.png -->
 ![Bloc SubXarxa /22](./source/01_Repas_TCP_IP/03-blocs-subxarxes-22.png)
 
 #### Procediment que pots repetir sempre
@@ -229,7 +229,7 @@ Si es divideix `192.168.10.0/24` en quatre subxarxes iguals, calen 2 bits per id
 | `192.168.10.128/26` | `.129–.190` | `.191` |
 | `192.168.10.192/26` | `.193–.254` | `.255` |
 
-<!-- IMATGE 03B: Barra de 192.168.10.0/24 dividida en quatre blocs /26 iguals. Marca xarxa, interval assignable i broadcast de cada bloc, i mostra que 4 × 64 = 256 adreces. Fitxer suggerit: source/01_Repas_TCP_IP/03b-divisio-24-en-26.png -->
+<!-- IMATGE 03B — PROMPT: Crea una barra de 192.168.10.0/24 dividida en quatre blocs /26 iguals. Marca xarxa, interval assignable i broadcast de cada bloc, i mostra que 4 × 64 = 256 adreces. Fes servir un codi de colors consistent i etiqueta els valors amb precisió. Fitxer suggerit: source/01_Repas_TCP_IP/03b-divisio-24-en-26.png -->
 ![Dividir una xarxa /24 en quatre xarxes /26](./source/01_Repas_TCP_IP/03b-divisio-24-en-26.png)
 
 ### 4. Configuració d'un equip: IP, màscara, gateway i DNS
@@ -245,7 +245,7 @@ Per comunicar-se, un equip acostuma a necessitar:
 - **Porta d'enllaç predeterminada (*gateway*):** la IP del router a la qual envia paquets destinats a altres xarxes. En una configuració habitual, ha de ser **dins de la mateixa subxarxa** que l'equip.
 - **Servidor DNS:** tradueix noms com `www.upc.edu` a adreces IP. **No és necessàriament la porta d'enllaç**.
 
-<!-- IMATGE 04: Pantalla esquemàtica de configuració d'un PC amb 192.168.10.20/24, gateway 192.168.10.1 i DNS 1.1.1.1. Indica que el DNS és només un exemple i que gateway i PC comparteixen la xarxa 192.168.10.0/24. Fitxer suggerit: imatges/configuracio-ip.png -->
+<!-- IMATGE 04 — PROMPT: Genera una pantalla esquemàtica, no una captura real, de configuració d'un PC amb 192.168.10.20/24, gateway 192.168.10.1 i DNS 1.1.1.1. Indica que el DNS és només un exemple i que gateway i PC comparteixen la xarxa 192.168.10.0/24. Estil net i llegible, sense logotips de programari. Fitxer suggerit: imatges/configuracio-ip.png -->
 ![Configuració IP](./source/01_Repas_TCP_IP/04-configuracio-ip.png)
 
 **Diagnosi d'una configuració:**
@@ -281,7 +281,7 @@ No interpretis una IP sense identificar abans la interfície. Una màquina virtu
 
 Segueix un ordre: **enllaç → IP i prefix → veí/gateway → ruta → connectivitat per IP → DNS → port i servei**. Formula una hipòtesi i canvia una sola cosa cada vegada.
 
-<!-- IMATGE 04A: Diagrama de diagnosi en set passos: enllaç, IP/prefix, veí o gateway, ruta, prova per IP, DNS i servei/port. A cada pas associa una ordre de Windows i una d'Ubuntu i mostra on s'atura la diagnosi segons el primer resultat incorrecte. Fitxer suggerit: source/01_Repas_TCP_IP/04a-diagnosi-per-capes.png -->
+<!-- IMATGE 04A — PROMPT: Dissenya un diagrama de diagnosi en set passos: enllaç, IP/prefix, veí o gateway, ruta, prova per IP, DNS i servei/port. A cada pas associa una ordre de Windows i una d'Ubuntu i mostra on s'atura la diagnosi segons el primer resultat incorrecte. Organitza'l com un flux llegible i comprova que les ordres siguin correctes abans de representar-les. Fitxer suggerit: source/01_Repas_TCP_IP/04a-diagnosi-per-capes.png -->
 ![Diagnosi per capes en set passos](./source/01_Repas_TCP_IP/04a-diagnosi-per-capes.png)
 
 ### 5. Encaminament entre xarxes
@@ -304,7 +304,7 @@ Quan diverses rutes coincideixen amb la IP de destinació, s'escull la **coincid
 
 **Exemple:** `10.10.20.9` és dins de `10.10.20.0/27`, que cobreix del `.0` al `.31`: el router l'envia a `10.1.2.2`. `10.10.20.36` cau fora d'aquest bloc i, si no hi ha cap altra coincidència, segueix la ruta per defecte.
 
-<!-- IMATGE 05: Dues xarxes locals, un router i una petita taula de rutes. Mostra en colors diferents un paquet que segueix la ruta /27 i un altre que segueix la ruta /0. Fitxer suggerit: imatges/rutes-i-seguent-salt.png -->
+<!-- IMATGE 05 — PROMPT: Crea un diagrama de dues xarxes locals, un router i una petita taula de rutes. Mostra en colors diferents un paquet que segueix la ruta /27 i un altre que segueix la ruta /0. Fes evident el següent salt sense afegir adreces que no s'especifiquen. Fitxer suggerit: imatges/rutes-i-seguent-salt.png -->
 ![Rutes i següent salt](./source/01_Repas_TCP_IP/05-rutes-i-seguent-salt.png)
 
 ### 6. TCP, UDP i ports
@@ -321,7 +321,7 @@ La capa de transport permet la comunicació entre aplicacions. **TCP** estableix
 | Garantia de lliurament i ordre del protocol de transport | Sí, mentre la connexió funciona | No |
 | Exemples habituals | HTTPS sobre TCP, SSH | DNS habitualment, comunicacions en temps real i QUIC/HTTP/3 |
 
-<!-- IMATGE 05A: Comparació en dues columnes entre TCP i UDP. A TCP mostra SYN, SYN-ACK, ACK i després dades numerades amb confirmació; a UDP mostra datagrames independents sense establiment equivalent. Inclou port d'origen temporal i port de destinació del servei, i evita afirmar que UDP és sempre més ràpid. Fitxer suggerit: source/01_Repas_TCP_IP/05a-tcp-udp-i-ports.png -->
+<!-- IMATGE 05A — PROMPT: Compara TCP i UDP en dues columnes. A TCP mostra SYN, SYN-ACK, ACK i després dades numerades amb confirmació; a UDP mostra datagrames independents sense establiment equivalent. Inclou un port d'origen temporal i un port de destinació del servei, sense valors concrets, i evita afirmar que UDP és sempre més ràpid. Usa diagrames de seqüència nets i etiquetes llegibles. Fitxer suggerit: source/01_Repas_TCP_IP/05a-tcp-udp-i-ports.png -->
 ![TCP i UDP: Com viatgen les dades](./source/01_Repas_TCP_IP/05a-tcp-udp-i-ports.png)
 
 **UDP no significa sempre «més ràpid»**, ni TCP assegura que un servei remot funcioni correctament: l'elecció depèn dels requisits de l'aplicació. Els ports `0–1023` són coneguts o *well-known*; `1024–49151`, registrats; `49152–65535`, dinàmics/privats. Un client sovint utilitza un port d'origen temporal i es connecta al port de destinació del servei.
@@ -362,7 +362,7 @@ Quan molts equips comparteixen **una IP pública**, el router també diferencia 
 
 El router registra aquestes associacions mentre són actives. En el trànsit de tornada, les consulta per lliurar cada resposta al dispositiu corresponent. La **traducció de destinació** (*DNAT*) es pot fer servir, per exemple, per redirigir cap a un servidor intern les peticions que arriben a un port publicat.
 
-<!-- IMATGE 06: Dos clients privats, un router amb una IP pública i un servidor remot. Dibuixa una petita taula amb les parelles IP:port abans i després de PAT i el recorregut de la resposta. Fitxer suggerit: imatges/nat-pat.png -->
+<!-- IMATGE 06 — PROMPT: Crea un diagrama original de NAT/PAT amb dos clients privats, un router amb una IP pública i un servidor remot. Afegeix una petita taula amb les parelles IP:port abans i després de PAT i dibuixa el recorregut de la resposta. No imitis cap figura existent; mantén les adreces d'exemple diferenciades i llegibles. Fitxer suggerit: imatges/nat-pat.png -->
 ![NAT i PAT](./source/01_Repas_TCP_IP/06-nat-pat.png)
 
 Amb **CG-NAT**, també el proveïdor d'Internet fa una traducció i diversos clients poden compartir adreces públiques. Això pot dificultar que una petició iniciada des d'Internet arribi directament a un servidor de casa, encara que es configurin ports al router domèstic. Per investigar-ho, compara l'adreça **WAN del teu router** amb l'adreça pública observada a Internet i consulta el proveïdor; un `tracert` pot aportar pistes, però **per si sol no demostra** que hi hagi CG-NAT.
@@ -450,7 +450,7 @@ Utilitza la taula de l'apartat 5. Per a cada destinació, indica **quina ruta co
 
 Completa les IP i màscares de tots els ordinadors, de la impressora i de les interfícies dels routers en **l'esquema original de l'activitat**. Representa la xarxa a Packet Tracer i comprova la comunicació amb **RIPv2** entre routers.
 
-<!-- IMATGE 07 — NECESSÀRIA PER A L'ACTIVITAT 6: Insereix aquí la figura de la pàgina 3 del PDF AA2-RepasXarxes, o una recreació fidel en alta resolució. Cal que es vegin PC0–PC12, Printer0, Router2, Router0, els enllaços, les tres xarxes RED 1/2/3 i totes les etiquetes grogues amb adreces parcials. Fitxer suggerit: imatges/activitat-6-topologia.png -->
+<!-- IMATGE 07 — NECESSÀRIA PER A L'ACTIVITAT 6 — PROMPT: Crea una topologia de xarxa original, sense copiar ni calcar cap figura d'un PDF o d'una altra font. Ha de contenir PC0–PC12, Printer0, Router2 i Router0, els enllaços, les tres xarxes RED 1/2/3 i espais amb etiquetes grogues d'adreces parcials. Organitza els dispositius de manera clara i deixa les adreces parcials sense completar perquè l'alumne resolgui l'activitat. Fitxer suggerit: imatges/activitat-6-topologia.png -->
 ![Topologia de xarxes](./source/01_Repas_TCP_IP/07-topologia.png)
 
 **Dades visibles a l'esquema, per poder preparar la pràctica:**
