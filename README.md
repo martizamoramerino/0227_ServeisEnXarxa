@@ -6,7 +6,7 @@ Al llarg del mòdul configurarem i administrarem serveis de xarxa en entorns Lin
 
 ## Lliçons disponibles
 
-Fes clic a la **imatge** quan n'hi hagi o al **títol** per obrir cada lliçó. Hi trobaràs les set guies i activitats disponibles, ordenades segons la numeració dels fitxers. Els documents **00 A** i **00 B** preparen el servidor i el client del laboratori.
+Fes clic a la **imatge** quan n'hi hagi o al **títol** per obrir cada lliçó. Hi trobaràs les guies i activitats disponibles, ordenades segons la numeració dels fitxers. Els documents **00 A** i **00 B** preparen el servidor i el client del laboratori.
 
 | Accés | Lliçó i continguts |
 |---|---|
@@ -17,10 +17,11 @@ Fes clic a la **imatge** quan n'hi hagi o al **títol** per obrir cada lliçó. 
 | [<img src="source/03_A_DHCP_Kea_Guide/00-configuracio-dhcp-kea-portada.png" alt="Obre la lliçó 03 A: Configuració de DHCP amb Kea a Ubuntu Server" width="280">](03_A_DHCP_Kea_Guia.md) | **[03 A · Configuració de DHCP amb Kea a Ubuntu Server](03_A_DHCP_Kea_Guia.md)**<br><br>Relaciona la teoria amb la configuració d'un servidor DHCPv4 a Ubuntu: interfícies, serveis, JSON, pools, opcions i temps de concessió.<br><br>**5 fases · 13 apartats**<br>Inclou validació del servei, comprovació del client, reserves, diagnosi i autoavaluació. |
 | [<img src="source/03_B_DHCP_KeaActivitat/00-activitat-dhcp-kea-zorin-portada.png" alt="Obre la lliçó 03 B: Activitat guiada de DHCP amb Kea i Zorin" width="280">](03_B_DHCP_Kea_Activitat.md) | **[03 B · Activitat guiada de DHCP amb Kea i Zorin](03_B_DHCP_Kea_Activitat.md)**<br><br>Desplega Kea amb les teves adreces de laboratori i comprova l'assignació des de Zorin. Captura i interpreta la negociació amb Wireshark.<br><br>**6 fases · 14 apartats**<br>Inclou consulta de concessions, prova d'una reserva, persistència i lliurament d'evidències. |
 | [<img src="source/04_DHCP_Repas/00-avaluacio-kea-dhcp-portada.png" alt="Obre l'activitat 04" width="280">](04_DHCP_Repas.md) | **[04 · Activitat d'avaluació: desplegament, configuració i anàlisi de Kea DHCP](04_DHCP_Repas.md)**<br><br>Enunciat d'avaluació sobre DORA i tràfic DHCP, configuració JSON de Kea, reserves, diagnosi al servidor i als clients, i disseny d'un mapa conceptual.<br><br>El lliurament demana un PDF únic amb redacció pròpia, captures de terminal i el mapa conceptual integrat. |
+| [<img src="source/05_RA01_Guia_Repas/00-portada-guia-repas.png" alt="Obre el Repàs 05" width="280">](05_RA01_Guia_Repas.md) | **[05 · RA01: Guia de repàs per a l'examen](05_RA01_Guia_Repas.md)**<br><br>Síntesi dels fonaments de TCP/IP i DHCP, amb un recordatori breu de les ordres Bash i del procés de comprovació de Kea. Inclou preguntes de repàs i prompts per generar imatges didàctiques. |
 
 ## Com seguir les guies
 
-Comença per les guies **00 A** i **00 B** per disposar de les dues VM. Repassa TCP/IP i la teoria DHCP amb els documents **01** i **02**; després utilitza la guia **03 A** com a suport per resoldre l'activitat pràctica **03 B**. L'activitat d'avaluació **04** recull els continguts de DHCP i Kea en un enunciat independent, amb lliurament en PDF.
+Comença per les guies **00 A** i **00 B** per disposar de les dues VM. Repassa TCP/IP i la teoria DHCP amb els documents **01** i **02**; després utilitza la guia **03 A** com a suport per resoldre l'activitat pràctica **03 B**. L'activitat d'avaluació **04** recull els continguts de DHCP i Kea en un enunciat independent, amb lliurament en PDF. La guia **05** sintetitza els continguts principals per preparar l'examen de la RA01.
 
 Per treballar amb les guies:
 
