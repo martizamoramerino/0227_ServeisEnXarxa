@@ -116,7 +116,7 @@ Dibuixa o esquematitza un mapa conceptual que connecti visualment tots els compo
 <!-- IMATGE 06 — PLANTILLA BUIDA PER AL MAPA CONCEPTUAL
 Prompt per generar la imatge: Crea una plantilla gràfica buida per elaborar un mapa conceptual sobre un servei de xarxa. Situa al centre un espai gran sense text i al voltant diversos nodes buits de formes variades, amb connectors fins i sense fletxes ni etiquetes. Deixa prou espai per escriure a mà o afegir-hi conceptes i relacions. No escriguis DHCP, Kea, ports, fases, ordres ni cap altre concepte de l'activitat: la plantilla no ha de contenir respostes. Estil net, apte per imprimir en A4 horitzontal. Fitxer suggerit: source/04_DHCP_Repas/06-plantilla-mapa-conceptual.png
 -->
-![Plantilla Mapa]()
+![Plantilla Mapa](./source/04_DHCP_Repas/06-plantilla-mapa-conceptual.png)
 Al mapa han d'aparèixer obligatòriament els conceptes i les relacions següents, **sense incloure'n la definició o l'explicació**:
 
 - **Nivell de transport i protocols:** ports UDP (`67` i `68`), broadcast i unicast.
